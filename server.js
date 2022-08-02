@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const app = express();
+const app = express(); // 实例化app
 
 // 引入user.js
 const users = require("./routes/api/users");
