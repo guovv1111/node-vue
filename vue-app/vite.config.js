@@ -2,13 +2,36 @@ import { fileURLToPath, URL } from 'url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+    server: {
+        // port: 3000,
+        open: true, // 自动在浏览器中打开
+        cors: true,
+        // proxy: {
+        //     '/base': {
+        //         target: 'http://8.135.1.141',
+        //         changeOrigin: true,
+        //         rewrite: path => path.replace(/^\/dev-api/, '')
+        //     }
+        // }
+    },
+    plugins: [
+        vue(),
+        AutoImport({
+            resolvers: [ElementPlusResolver()],
+        }),
+        Components({
+            resolvers: [ElementPlusResolver()],
+        })
+    ],
+    resolve: {
+        alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+        }
     }
-  }
 })
