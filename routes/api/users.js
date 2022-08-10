@@ -22,9 +22,9 @@ router.post('/register', (req, res) => {
         email: req.body.email,
         password: req.body.password
     });
-    newUser.save()
-    res.json(newUser)
-        
+    newUser.save();
+    res.json(newUser);
+    
     // 密码加密 install bcrypt
     // console.log(req.body)
     // 查询数据库中是否邮箱重复
@@ -63,19 +63,21 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     const email  = req.body.email;
     const password = req.body.password;
-    User.findOne({ email })
-    .then(user => {
-        if(!user) {
-            return res.status(404).json({ email: "用户不存在！" })
-        }
-        bcrypt.compare(password, user.password).then(isMathch => {
-            if(isMathch) {
-                return res.json({msg: 'success'});
-            } else {
-                return res.status(404).json({password: '密码错误！'});
-            }
-        })
-    })
+    res.json({msg: User});
+    // User.findOne({ email })
+    // .then(user => {
+    //     res.json({msg: user});
+    //     // if(!user) {
+    //     //     return res.status(404).json({ email: "用户不存在！" })
+    //     // }
+    //     // bcrypt.compare(password, user.password).then(isMathch => {
+    //     //     if(isMathch) {
+    //     //         return res.json({msg: 'success'});
+    //     //     } else {
+    //     //         return res.status(404).json({password: '密码错误！'});
+    //     //     }
+    //     // })
+    // })
 })
 
 module.exports = router;
