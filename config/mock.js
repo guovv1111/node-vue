@@ -1,55 +1,52 @@
-const  menu =  {
-    "msg":"成功",
-    "code":"E1",
-    "status":200,
-    "result": 1,
-    "menus":[
+const menu = {
+  msg: "成功",
+  code: "E1",
+  status: 200,
+  result: 1,
+  menus: [
+    {
+      name: "关于",
+      type: "LIST",
+      icon: "build",
+      subMenus: [
         {
-            "name":"关于",
-            "type":"LIST",
-            "icon":"build",
-            "subMenus":[
-                {
-                    "permission":true,
-                    "name":"个人信息",
-                    "type":"SINGLE",
-                    "path":"/about",
-                    "applyUrl":"https://sep-auth.corp.kuaishou.com?resourceUrn=ks%3Aweb%2Fgame_zone_admin%3A%2F16100",
-                    "icon":"image"
-                }
-            ]
+          permission: true,
+          name: "个人信息",
+          type: "SINGLE",
+          path: "/about",
+          icon: "image",
         },
+      ],
+    },
+    {
+      name: "记录",
+      type: "LIST",
+      icon: "build",
+      subMenus: [
         {
-            "name":"记录",
-            "type":"LIST",
-            "icon":"build",
-            "subMenus":[
-                {
-                    "permission":true,
-                    "name":"照片",
-                    "type":"SINGLE",
-                    "path":"/record",
-                    "applyUrl":"https://sep-auth.corp.kuaishou.com?resourceUrn=ks%3Aweb%2Fgame_zone_admin%3A%2F16100",
-                    "icon":"image"
-                }
-            ]
+          permission: true,
+          name: "照片",
+          type: "SINGLE",
+          path: "/record",
+          icon: "image",
         },
+      ],
+    },
+    {
+      name: "通用",
+      type: "LIST",
+      icon: "build",
+      subMenus: [
         {
-            "name":"通用",
-            "type":"LIST",
-            "icon":"build",
-            "subMenus":[
-                {
-                    "permission":true,
-                    "name":"date",
-                    "type":"SINGLE",
-                    "path":"/common/date",
-                    "applyUrl":"https://sep-auth.corp.kuaishou.com?resourceUrn=ks%3Aweb%2Fgame_zone_admin%3A%2F16100",
-                    "icon":"image"
-                }
-            ]
-        }
-    ]
-}
+          permission: true,
+          name: "date",
+          type: "SINGLE",
+          path: "/common/date",
+          icon: "image",
+        },
+      ],
+    },
+  ],
+};
 
-module.exports = menu; 
+module.exports = menu;

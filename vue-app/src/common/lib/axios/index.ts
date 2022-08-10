@@ -5,66 +5,79 @@
  * @LastEditors: dujiang
  * @Description:
  */
-import axios, { AxiosResponse, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
+import axios, {
+  AxiosResponse,
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+} from "axios";
 
 const instance = axios.create({
-    baseURL:'http://localhost:5000', //请求后端数据的基本地址，自定义
-	// timeout: 2000  
-    // timeout: 10 * 1000,
-    // withCredentials: true,
-    headers: {
-        'Content-Type': 'application/json;charset=UTF-8'
-    }
+  baseURL: "http://localhost:5000", //请求后端数据的基本地址，自定义
+  // timeout: 2000
+  // timeout: 10 * 1000,
+  // withCredentials: true,
+  headers: {
+    "Content-Type": "application/json;charset=UTF-8",
+  },
 });
 
 export interface AxiosConfig extends AxiosRequestConfig {
-    headers?: AxiosRequestHeaders;
+  headers?: AxiosRequestHeaders;
 }
 
-export {
-    instance
-};
+export { instance };
 
 interface Response {
-    result?: number;
-    code?: string | number;
-    msg?: string;
+  result?: number;
+  code?: string | number;
+  msg?: string;
 }
 
 const errorHandler = (error: Error) => {
-    throw error;
+  throw error;
 };
 
 const responseHandler = (response: AxiosResponse<Response>) => {
-    return new Promise((resolve, reject) => {
-        const body = response.data;
-        if(body.result !== 1 && body.code !== 'E1') {
-            reject(body);
-        } else {
-            resolve(body);
-        }
-        if(body.code === 'E10') {
-            const ssoUrl = 'https://sso.corp.kuaishou.com/cas/login?service=';
-            const apiUrl = `${location.origin}/api/login?redirect=${encodeURIComponent(location.href)}`;
-            window.location.href = `${ssoUrl}${encodeURIComponent(apiUrl)}`;
-        }
-    }).then(null, errorHandler);
+  return new Promise((resolve, reject) => {
+    const body = response.data;
+    if (body.result !== 1 && body.code !== "E1") {
+      reject(body);
+    } else {
+      resolve(body);
+    }
+  }).then(null, errorHandler);
 };
 
 instance.interceptors.response.use(responseHandler);
 
-export const get = <T, P=Record<string, unknown>>(url: string, params?: P, config?: AxiosConfig) => {
-    return instance.get<T>(url, { params, ...config });
+export const get = <T, P = Record<string, unknown>>(
+  url: string,
+  params?: P,
+  config?: AxiosConfig
+) => {
+  return instance.get<T>(url, { params, ...config });
 };
 
-export const post = <T, P=Record<string, unknown>>(url: string, params?: P, config?: AxiosConfig) => {
-    return instance.post<T>(url, params, config);
+export const post = <T, P = Record<string, unknown>>(
+  url: string,
+  params?: P,
+  config?: AxiosConfig
+) => {
+  return instance.post<T>(url, params, config);
 };
 
-export const put = <T, P=Record<string, unknown>>(url: string, params?: P, config?: AxiosConfig) => {
-    return instance.put<T>(url, params, config);
+export const put = <T, P = Record<string, unknown>>(
+  url: string,
+  params?: P,
+  config?: AxiosConfig
+) => {
+  return instance.put<T>(url, params, config);
 };
 
-export const del = <T, P=Record<string, unknown>>(url: string, params?: P, config?: AxiosConfig) => {
-    return instance.delete<T>(url, { params, ...config  });
+export const del = <T, P = Record<string, unknown>>(
+  url: string,
+  params?: P,
+  config?: AxiosConfig
+) => {
+  return instance.delete<T>(url, { params, ...config });
 };
